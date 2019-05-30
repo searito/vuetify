@@ -18,8 +18,19 @@
                 </v-btn>
             </v-toolbar>
 
-            <v-navigation-drawer v-model="drawer" app class="blue-grey lighten-1">
-                <p>Prueba</p>
+            <v-navigation-drawer v-model="drawer" app class="blue-grey darken-3">
+                <v-list>
+                    <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
+                        <v-list-tile-action>
+                            <v-icon class="white--text">{{ link.icon }}</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title class="white--text">
+                                {{ link.text }}
+                            </v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list>
             </v-navigation-drawer>
         </nav>
     </div>
@@ -30,6 +41,11 @@ export default {
     data() {
         return {
             drawer: false,
+            links: [
+                { icon: 'dashboard', text :'Dashboard', route: '/' },
+                { icon: 'folder', text :'Proyectos', route: '/projects' },
+                { icon: 'person', text :'Equipo', route: '/team' },
+            ],
         }
     },
 }
