@@ -3,33 +3,33 @@
     <h1 class="subheading blue-grey--text">Dashboard</h1>
 
     <v-container class="my-3">
-      <v-card class="pa-3">
-        <v-layout row wrap>
+      <v-card class="pa-3" v-for="project in projects" :key="project.title">
+        <v-layout row wrap :class="`pa-3 project ${project.status}`">
           <v-flex xs12 md6>
             <div class="caption grey--text">
               Proyecto
             </div>
-            <div>Crear Nuevo Sitio</div>
+            <div>{{ project.title }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2>
             <div class="caption grey--text">
               Creador
             </div>
-            <div>Searito's</div>
+            <div>{{ project.person }}</div>
           </v-flex>
 
           <v-flex xs6 sm4 md2>
             <div class="caption grey--text">
               Fecha
             </div>
-            <div>30/05/2019</div>
+            <div>{{ project.due }}</div>
           </v-flex>
 
           <v-flex xs6 sm4 md2>
             <div class="caption grey--text">
               Status
             </div>
-            <div>Diagramación</div>
+            <div>{{ project.status }}</div>
           </v-flex>
         </v-layout>
       </v-card>
@@ -40,6 +40,30 @@
 <script>
 
   export default {
-    
+    data() {
+      return {
+        projects: [
+          { 
+            title: 'Diseñar Nuevo Sitio', person: 'Sear', due: '01/01/2019', status: 'Proceso', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+          { title: 'Codificar Sitio', person: 'Sear', due: '10/01/2019', status: 'Completo', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+          { title: 'Diseñar Imagenes Adaptativas', person: 'Sear', due: '02/06/2019', status: 'Completo', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+          { title: 'Crear Foro', person: 'Pito Pérez', due: '03/06/2019', status: 'Retraso', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+        ]
+      }
+    },
   }
 </script>
+
+<style>
+  .project.Completo{
+    border-left: 4px solid rgba(0,255,127, .7);
+  }
+  
+  .project.Proceso{
+    border-left: 4px solid rgba(37,171,224, .7);
+  }
+
+  .project.Retraso{
+    border-left: 4px solid rgba(255,99,71, .7);
+  }
+</style>
