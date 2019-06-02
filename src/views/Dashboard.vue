@@ -26,10 +26,9 @@
           </v-flex>
 
           <v-flex xs6 sm4 md2>
-            <div class="caption grey--text">
-              Status
+            <div class="right"> 
+              <v-chip small :class="`${project.status} white--text caption my-2`">{{ project.status }}</v-chip>
             </div>
-            <div>{{ project.status }}</div>
           </v-flex>
         </v-layout>
       </v-card>
@@ -65,5 +64,17 @@
 
   .project.Retraso{
     border-left: 4px solid rgba(255,99,71, .7);
+  }
+
+  .v-chip.Completo{
+    background: rgba(0,255,127, .7);
+  }
+  
+  .v-chip.Proceso{
+    background: rgba(37,171,224, .7);
+  }
+
+  .v-chip.Retraso{
+    background: rgba(255,99,71, .7);
   }
 </style>
