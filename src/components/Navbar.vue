@@ -38,6 +38,10 @@
                         </v-avatar>
                         <p class="white--text subheading mt-1">Sear Clímaco</p>
                     </v-flex>
+
+                    <v-flex class="mt-4 mb-3">
+                        <Popup />
+                    </v-flex>
                 </v-layout>
                 
                 <v-list>
@@ -58,7 +62,11 @@
 </template>
 
 <script>
+import Popup from './Popup'
+
 export default {
+    components: {Popup},
+
     data() {
         return {
             drawer: false,
