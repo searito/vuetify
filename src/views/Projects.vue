@@ -2,20 +2,18 @@
   <div class="projects">
     <h1 class="subheading blue-grey--text">Proyectos</h1>
 
-     <v-container class="my-3">
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium sint illum perspiciatis! Nobis dolore, 
-        ullam ipsum corporis ab accusamus sapiente voluptatibus, nemo perferendis reprehenderit mollitia temporibus eius 
-        rerum, excepturi eum.
-      </p>
-      <p>
-        Labore porro quia quod, pariatur quae maiores nemo. Sunt qui natus doloremque nobis aspernatur quos dicta ex officia 
-        deleniti deserunt ut, vel corporis tempore quaerat odit alias sed fugit dignissimos.
-      </p>
-      <p>
-        Ex amet maxime deleniti odit tempore dicta sequi soluta saepe aliquam beatae neque molestias, quia culpa, corrupti 
-        libero! Id doloribus neque odio, sint harum molestias perferendis qui quia ipsa temporibus!
-      </p>
+    <v-container class="my-3">
+      <v-expansion-panel expand focusable>
+        <VExpansionPanelContent v-for="project in myProjects" :key="project.title">
+          <div slot="header">{{ project.title }}</div>
+          <VCard>
+            <v-card-text class="px-4 grey--text">
+              <div class="font-weight-bold">{{ project.due }}</div>
+              {{ project.content}}
+            </v-card-text>
+          </VCard>
+        </VExpansionPanelContent>
+      </v-expansion-panel>
     </v-container>
        
   </div>
@@ -24,6 +22,22 @@
 <script>
 
   export default {
-    
+    data() {
+      return {
+        projects: [
+          { title: 'Diseñar Nuevo Sitio', person: 'Sear', due: '01/01/2019', status: 'Proceso', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+          { title: 'Codificar Sitio', person: 'Sear', due: '10/01/2019', status: 'Completo', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+          { title: 'Diseñar Imagenes Adaptativas', person: 'Sear', due: '02/06/2019', status: 'Completo', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+          { title: 'Crear Foro', person: 'Pito Pérez', due: '03/06/2019', status: 'Retraso', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+        ]
+      }
+    },
+    computed: {
+      myProjects(){
+        return this.projects.filter(project => {
+          return project.person === 'Sear'
+        });
+      }
+    },
   }
 </script>
