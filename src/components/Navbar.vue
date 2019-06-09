@@ -12,6 +12,18 @@
 
                 <v-spacer></v-spacer>
 
+                <v-menu offset-y>
+                    <v-btn color="blue-grey darken-3" dark slot="activator">
+                        <v-icon left>expand_more</v-icon>
+                        <span>Menú</span>
+                    </v-btn>
+                    <v-list>
+                        <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
+                            <v-list-tile-title>{{ link.text }}</v-list-tile-title>
+                        </v-list-tile>
+                    </v-list>
+                </v-menu>
+
                 <v-btn color="blue-grey lighten-4">
                     <span>Salir</span>
                     <v-icon right>power_settings_new</v-icon>
