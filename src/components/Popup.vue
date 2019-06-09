@@ -13,6 +13,13 @@
 
                    <VTextarea label="Información" v-model="content" prepend-icon="edit"/>
 
+                   <v-menu>
+                       <VTextField label="Fecha" slot="activator" prepend-icon="date_range" :value="formattedDate"/>
+                       <VDatePicker v-model="due" :landscape="false" :reactive="true"></VDatePicker>
+                   </v-menu>
+
+                   <VSpacer/>
+
                    <v-btn color="blue-grey lighten-4" class="mx-0 mt-3" @click="submit">
                        Añadir Proyecto
                     </v-btn>
@@ -23,19 +30,28 @@
 </template>
 
 <script>
+import format from 'date-fns/format'
+
 export default {
     data(){
         return {
             dialog: false,
             title: '',
             content: '',
+            due: null,
+        }
+    },
+
+    computed: {
+        formattedDate(){
+            return this.due ? format(this.due, 'Do MMM YYYY') : ''
         }
     },
 
     methods: {
         submit(){
-            let self = this;
-            console.log(self.title, self.content);
+            //let self = this;
+            //console.log(self.title, self.content);
         }
     },
 }
