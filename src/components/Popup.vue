@@ -31,6 +31,7 @@
 
 <script>
 import format from 'date-fns/format'
+import db from './../fb'
 
 export default {
     data(){
@@ -40,7 +41,7 @@ export default {
             content: '',
             due: null,
             inputRules: [
-                v => v.length >= 3 || '3 caracteres como mínimo'
+                v => (v && v.length >= 3) || '3 caracteres como mínimo'
             ],
             //due: new Date().toISOString().substring(0, 10)
         }
@@ -57,7 +58,18 @@ export default {
             let self = this;
 
             if(self.$refs.form.validate()){
-                alert('Título: '+ self.title + ' Contenido: ' + self.content);
+                const project = {
+                    title: self.title,
+                    content: self.content,
+                    due: format(self.due, 'DD MMM YYYY'),
+                    person: 'Sear',
+                    status: 'Proceso'
+                }
+
+                db.collection('projects').add(project).then(() => {
+                    console.log('Agregado a la BD')
+                })
+
                 self.$refs.form.reset();
                 self.dialog = false;
                 
