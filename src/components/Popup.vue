@@ -71,11 +71,10 @@ export default {
 
                 db.collection('projects').add(project).then(() => {
                     self.loading = false;
-                })
-
-                self.$refs.form.reset();
-                self.dialog = false;
-                
+                    self.$refs.form.reset();
+                    self.dialog = false;
+                    self.$emit('projectAdded');
+                })                
             }
         }
     },
