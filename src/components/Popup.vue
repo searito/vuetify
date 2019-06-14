@@ -20,7 +20,7 @@
 
                    <VSpacer/>
 
-                   <v-btn color="blue-grey lighten-4" class="mx-0 mt-3" @click="submit">
+                   <v-btn color="blue-grey lighten-4" class="mx-0 mt-3" @click="submit" :loading="loading">
                        Añadir Proyecto
                     </v-btn>
                </v-form>
@@ -43,6 +43,7 @@ export default {
             inputRules: [
                 v => (v && v.length >= 3) || '3 caracteres como mínimo'
             ],
+            loading: false,
             //due: new Date().toISOString().substring(0, 10)
         }
     },
@@ -58,6 +59,8 @@ export default {
             let self = this;
 
             if(self.$refs.form.validate()){
+                self.loading = true;
+
                 const project = {
                     title: self.title,
                     content: self.content,
@@ -67,7 +70,7 @@ export default {
                 }
 
                 db.collection('projects').add(project).then(() => {
-                    console.log('Agregado a la BD')
+                    self.loading = false;
                 })
 
                 self.$refs.form.reset();
