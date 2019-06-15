@@ -20,17 +20,27 @@
 </template>
 
 <script>
+  import db from '@/fb';
 
   export default {
     data() {
       return {
-        projects: [
-          { title: 'Diseñar Nuevo Sitio', person: 'Sear', due: '01/01/2019', status: 'Proceso', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-          { title: 'Codificar Sitio', person: 'Sear', due: '10/01/2019', status: 'Completo', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-          { title: 'Diseñar Imagenes Adaptativas', person: 'Sear', due: '02/06/2019', status: 'Completo', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-          { title: 'Crear Foro', person: 'Pito Pérez', due: '03/06/2019', status: 'Retraso', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        ]
+        projects: [],
       }
+    },
+    created(){
+      db.collection('projects').onSnapshot(res => {
+        const changes = res.docChanges()
+
+        changes.forEach(change => {
+          if(change.type === 'added'){
+            this.projects.push({
+              ...change.doc.data(),
+              id: change.doc.id
+            });
+          }
+        });
+      });
     },
     computed: {
       myProjects(){
